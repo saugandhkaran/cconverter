@@ -1,18 +1,45 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+<div>
+  <div class="flex-container around">
+    <div class="boxing">
+    <ConverterBox @updated-db="reloadConvertHistory()"/>
+    <ChartContainer />
+    </div>
+    <ConvertHistory :key="reloader"/>
   </div>
+</div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import ConverterBox from '@/components/ConverterBox';
+import ConvertHistory from '@/components/ConvertHistory';
+import ChartContainer from '@/components/ChartContainer';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    HelloWorld
+    ConverterBox,
+    ConvertHistory,
+    ChartContainer
+  },
+  data() {
+    return {
+      reloader: 0
+    }
+  },
+  methods: {
+    reloadConvertHistory() {
+      this.reloader++;
+    }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@media screen and (max-width: 445px) {
+  .boxing {
+    width: 351px;
+  }
+}
+</style>
